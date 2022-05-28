@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SwostiProject</string>
+
+    <string-array name="UserType">
+        <item>Demo 1</item>
+        <item>Demo 2</item>
+        <item>Demo 3</item>
+        <item>Demo 4</item>
+    </string-array>
+</resources>
