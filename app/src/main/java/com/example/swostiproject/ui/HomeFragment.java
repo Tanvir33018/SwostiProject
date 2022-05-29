@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.swostiproject.R;
+import com.example.swostiproject.adapter.RecycleApdater1;
 import com.example.swostiproject.databinding.HomeFragmentBinding;
 import com.example.swostiproject.network_model.collection_sheet_model.CollectionSheetModel;
 import com.example.swostiproject.network_model.member_info_model.MemberInfoModel;
@@ -33,6 +36,8 @@ public class HomeFragment extends Fragment {
     private MemberInfoModel mMemberInfoModel;
     private CollectionSheetModel mCollectionSheetModel;
     private static final String TAG = "HomeFragment";
+    private RecycleApdater1 mAdapter1;
+    private RecyclerView mRecyclerView;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -54,6 +59,9 @@ public class HomeFragment extends Fragment {
         mMemberInfoModel = new MemberInfoModel();
         mCollectionSheetModel = new CollectionSheetModel();
         mMemberInfoModelData = new MutableLiveData<>();
+        mRecyclerView = mBinding.recylerView;
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
     }
 
     private void loadData() {
@@ -72,7 +80,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(CollectionSheetModel collectionSheetModel) {
                 mCollectionSheetModel = collectionSheetModel;
-
+                mAdapter1 = new RecycleApdater1(mCollectionSheetModel);
+                mRecyclerView.setAdapter(mAdapter1);
                 Log.d(TAG, "onChanged: ");
             }
         });
